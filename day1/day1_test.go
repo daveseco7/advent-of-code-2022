@@ -1,8 +1,9 @@
-package day1
+package day1_test
 
 import (
 	"testing"
 
+	"github.com/daveseco7/advent-of-code-2022/day1"
 	"github.com/daveseco7/advent-of-code-2022/util"
 )
 
@@ -16,9 +17,9 @@ func TestExe1(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		tch := make(topCalorieHolder, 1) // preload the holder struct with zeros
+		tch := make(day1.TopCalorieHolder, 1) // preload the holder struct with zeros
 
-		ans := exe(lineArray, tch)
+		ans := day1.Exe(lineArray, tch)
 		if ans != expected {
 			t.Errorf("invalid response %d", ans)
 		}
@@ -32,9 +33,9 @@ func TestExe1(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		tch := make(topCalorieHolder, 1) // preload the holder struct with zeros
+		tch := make(day1.TopCalorieHolder, 1) // preload the holder struct with zeros
 
-		ans := exe(lineArray, tch)
+		ans := day1.Exe(lineArray, tch)
 		if ans != expected {
 			t.Errorf("invalid response %d", ans)
 		}
@@ -51,15 +52,15 @@ func TestExe2(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		tch := make(topCalorieHolder, 3) // preload the holder struct with zeros
+		tch := make(day1.TopCalorieHolder, 3) // preload the holder struct with zeros
 
-		ans := exe(lineArray, tch)
+		ans := day1.Exe(lineArray, tch)
 		if ans != expected {
 			t.Errorf("invalid response %d", ans)
 		}
 	})
 	t.Run("puzzle input", func(T *testing.T) {
-		const expected = 66719
+		const expected = 198551
 		const filePath = "input1.txt"
 
 		lineArray, err := util.ReadLines(filePath)
@@ -67,9 +68,9 @@ func TestExe2(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		tch := make(topCalorieHolder, 3) // preload the holder struct with zeros
+		tch := make(day1.TopCalorieHolder, 3) // preload the holder struct with zeros
 
-		ans := exe(lineArray, tch)
+		ans := day1.Exe(lineArray, tch)
 		if ans != expected {
 			t.Errorf("invalid response %d", ans)
 		}

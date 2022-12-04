@@ -2,9 +2,9 @@ package day1
 
 import "github.com/daveseco7/advent-of-code-2022/util"
 
-type topCalorieHolder []int
+type TopCalorieHolder []int
 
-func (tch topCalorieHolder) setPossibleTopValue(currentCalories int) {
+func (tch TopCalorieHolder) setPossibleTopValue(currentCalories int) {
 	for index, topCalories := range tch {
 		if currentCalories > topCalories {
 			// set new top value
@@ -19,7 +19,7 @@ func (tch topCalorieHolder) setPossibleTopValue(currentCalories int) {
 	}
 }
 
-func exe(lines []string, tch topCalorieHolder) (topTotalCalories int) {
+func Exe(lines []string, tch TopCalorieHolder) (topTotalCalories int) {
 	var tempCal = 0
 
 	for i := 0; i < len(lines); i++ {
