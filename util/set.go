@@ -34,3 +34,38 @@ func (s *IntSet) Delete(value ...int) {
 		delete(*s, v)
 	}
 }
+
+type StrSet map[string]struct{}
+
+func (s *StrSet) AddValue(value string) {
+	if *s == nil {
+		m := make(map[string]struct{})
+		*s = m
+	}
+	(*s)[value] = struct{}{}
+}
+
+func (s *StrSet) GetValues() []string {
+	if *s == nil {
+		return nil
+	}
+	values := make([]string, 0, len(*s))
+	for v := range *s {
+		values = append(values, v)
+	}
+	return values
+}
+
+func (s *StrSet) Contains(value string) bool {
+	if *s == nil {
+		return false
+	}
+	_, ok := (*s)[value]
+	return ok
+}
+
+func (s *StrSet) Delete(value ...string) {
+	for _, v := range value {
+		delete(*s, v)
+	}
+}
