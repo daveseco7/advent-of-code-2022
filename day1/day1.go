@@ -1,31 +1,46 @@
 package day1
 
-const filePath = "input1.txt"
+import "github.com/daveseco7/advent-of-code-2022/util"
 
-func exe1(lines []int) (asc int) {
-	for i := 0; i < len(lines)-1; i++ {
-		if lines[i+1]-lines[i] > 0 {
-			asc++
+type topCalorieHolder []int
+
+func (tch topCalorieHolder) setPossibleTopValue(currentCalories int) {
+	for index, topCalories := range tch {
+		if currentCalories > topCalories {
+			// set new top value
+			tch[index] = currentCalories
+
+			// re-run the algorithm with the value that just got evicted
+			tch.setPossibleTopValue(topCalories)
+
+			// new value already set, break slice looping
+			break
 		}
 	}
-
-	return asc
 }
 
-func exe2(lines []int) (asc int) {
-	newInput := make([]int, 0)
-	for i := 0; i < len(lines)-3; i += 2 {
-		threeMeasurementA := lines[i] + lines[i+1] + lines[i+2]
-		threeMeasurementB := lines[i+1] + lines[i+2] + lines[i+3]
-		newInput = append(newInput, threeMeasurementA)
-		newInput = append(newInput, threeMeasurementB)
-	}
+func exe(lines []string, tch topCalorieHolder) (topTotalCalories int) {
+	var tempCal = 0
 
-	for i := 0; i < len(newInput)-1; i++ {
-		if newInput[i+1]-newInput[i] > 0 {
-			asc++
+	for i := 0; i < len(lines); i++ {
+		isNewLine := len(lines[i]) == 0
+		isLastLine := len(lines)-1 == i
+
+		if !isNewLine {
+			tempCal += util.MustAtoi(lines[i])
+		}
+
+		// if no calories input is given, or if its the last vlaue to be processed
+		// we finish processing a elf calorie package and run the top value algorithm
+		if isNewLine || isLastLine {
+			tch.setPossibleTopValue(tempCal)
+			tempCal = 0
 		}
 	}
 
-	return asc
+	for _, calories := range tch {
+		topTotalCalories += calories
+	}
+
+	return topTotalCalories
 }

@@ -7,29 +7,71 @@ import (
 )
 
 func TestExe1(t *testing.T) {
-	const expected = 1624
+	t.Run("puzzle sample", func(T *testing.T) {
+		const expected = 24000
+		const filePath = "sample.txt"
 
-	lineArray, err := util.ReadLinesAsInt(filePath)
-	if err != nil {
-		t.Fatal(err)
-	}
+		lineArray, err := util.ReadLines(filePath)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-	ans := exe1(lineArray)
-	if ans != expected {
-		t.Errorf("invalid response %d", ans)
-	}
+		tch := make(topCalorieHolder, 1) // preload the holder struct with zeros
+
+		ans := exe(lineArray, tch)
+		if ans != expected {
+			t.Errorf("invalid response %d", ans)
+		}
+	})
+	t.Run("puzzle input", func(T *testing.T) {
+		const expected = 66719
+		const filePath = "input1.txt"
+
+		lineArray, err := util.ReadLines(filePath)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		tch := make(topCalorieHolder, 1) // preload the holder struct with zeros
+
+		ans := exe(lineArray, tch)
+		if ans != expected {
+			t.Errorf("invalid response %d", ans)
+		}
+	})
 }
 
 func TestExe2(t *testing.T) {
-	const expected = 1653
+	t.Run("puzzle sample", func(T *testing.T) {
+		const expected = 45000
+		const filePath = "sample.txt"
 
-	lineArray, err := util.ReadLinesAsInt(filePath)
-	if err != nil {
-		t.Fatal(err)
-	}
+		lineArray, err := util.ReadLines(filePath)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-	ans := exe2(lineArray)
-	if ans != expected {
-		t.Errorf("invalid response %d", ans)
-	}
+		tch := make(topCalorieHolder, 3) // preload the holder struct with zeros
+
+		ans := exe(lineArray, tch)
+		if ans != expected {
+			t.Errorf("invalid response %d", ans)
+		}
+	})
+	t.Run("puzzle input", func(T *testing.T) {
+		const expected = 66719
+		const filePath = "input1.txt"
+
+		lineArray, err := util.ReadLines(filePath)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		tch := make(topCalorieHolder, 3) // preload the holder struct with zeros
+
+		ans := exe(lineArray, tch)
+		if ans != expected {
+			t.Errorf("invalid response %d", ans)
+		}
+	})
 }
